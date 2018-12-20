@@ -43,6 +43,13 @@ paths:
                 type: array
                 items: 
                   $ref: '#components/schemas/BottleTest'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
 
   /bottletests/{id}:
     parameters:
@@ -62,6 +69,140 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/BottleTest'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottletests/{id}/bottles:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleTest/properties/id'
+    get:
+      summary: Retrieve bottles from a specific test
+      description: Retrieve bottles from a specific test
+      responses:
+        200:
+          description: Successfully retrieved bottles from a specific bottle test
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/Bottle'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottletests/{id}/bottles/{bottle_id}:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleTest/properties/id'
+      - name: bottle_id
+        in: path
+        description: Id of the bottle 
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+    get:
+      summary: Retrieve bottles from a specific test
+      description: Retrieve bottles from a specific test
+      responses:
+        200:
+          description: Successfully retrieved bottles from a specific bottle test
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Bottle'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottletests/{id}/bottles/{bottle_id}/counts:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleTest/properties/id'
+      - name: bottle_id
+        in: path
+        description: Id of the bottle 
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+    get:
+      summary: Retrieve bottles from a specific test
+      description: Retrieve bottles from a specific test
+      responses:
+        200:
+          description: Successfully retrieved bottles from a specific bottle test
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/BottleCount'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel' 
+
+  /bottletests/{id}/bottles/{bottle_id}/counts/{count_id}:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleTest/properties/id'
+      - name: bottle_id
+        in: path
+        description: Id of the bottle 
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+      - name: count_id
+        in: path
+        description: Id of the count
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleCount/properties/id'
+    get:
+      summary: Retrieve a specific count
+      description: Retrieve a specific count 
+      responses:
+        200:
+          description: Successfully retrieved specific count
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/BottleCount'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'          
 
   /bottles:
     parameters:
@@ -95,6 +236,95 @@ paths:
                 type: array
                 items: 
                   $ref: '#components/schemas/Bottle'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottles/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+    get:
+      summary: Retrieve a specific bottle
+      description: Retrieve a specific bottle identified by id
+      responses:
+        200:
+          description: Successfully retrieved a bottle test
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Bottle'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottles/{id}/counts:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+    get:
+      summary: Retrieve a specific bottle's counts
+      description: Retrieve a specific bottle's count
+      responses:
+        200:
+          description: Successfully retrieved a bottle test's counts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/schemas/BottleCount'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottles/{id}/counts/{count_id}:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle test
+        required: true
+        schema:
+          $ref: '#components/schemas/Bottle/properties/id'
+      - name: count_id
+        in: path
+        description: Id of the bottle count
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleCount/properties/id'
+    get:
+      summary: Retrieve a specific bottle count
+      description: Retrieve a specific bottle count
+      responses:
+        200:
+          description: Successfully retrieved a bottle count
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/BottleCount'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
 
   /bottlecounts:
     parameters:
@@ -111,7 +341,7 @@ paths:
         schema:
           type: integer
     get:
-      summary: Retrieve bottle tests
+      summary: Retrieve bottle count
       description: Retrieve bottle tests
       responses:
         200:
@@ -128,9 +358,84 @@ paths:
                 type: array
                 items: 
                   $ref: '#components/schemas/BottleCount'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
+
+  /bottlecounts/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: Id of the bottle count
+        required: true
+        schema:
+          $ref: '#components/schemas/BottleCount/properties/id'
+    get:
+      summary: Retrieve a specific bottle count
+      description: Retrieve a specific bottle identified by id
+      responses:
+        200:
+          description: Successfully retrieved a bottle test
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Bottle'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
 
 components:
+  responses:
+    NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+    InternalError:
+      description: Internal Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorModel'
+
   schemas:
+    ErrorModel:
+      type: object
+      required:
+      - message
+      - code
+      properties:
+        message:
+          type: string
+          example: "Something went wrong"
+        code:
+          type: integer
+          minimum: 100
+          maximum: 600
+          example: 500
+    ExtendedErrorModel:
+      allOf:
+      - $ref: '#/components/schemas/ErrorModel'
+      - type: object
+        required:
+        - rootCause
+        properties:
+          rootCause:
+            type: string
+
     BottleTest:
       properties:
         id:
@@ -276,6 +581,3 @@ components:
           format: date-time
           description: The datetime this record was created
           example: 2018-11-07 08:18:29.930559-08
-
-        
-
