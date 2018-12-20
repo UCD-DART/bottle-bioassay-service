@@ -4,4 +4,5 @@ python:
   - "3.6"
 # command to install dependencies
 install: make
-script: make ci
+script:
+  - make ci

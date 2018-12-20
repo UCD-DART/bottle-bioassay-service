@@ -3,4 +3,7 @@ init:
 	pipenv install --dev
 
 test:
-	pipenv run py.test tests
+	pipenv run py.test
+
+ci: 
+	pipenv run py.test
