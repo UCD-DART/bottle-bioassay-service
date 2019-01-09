@@ -26,6 +26,7 @@ paths:
         schema:
           type: integer
     get:
+      operationId: bottle_bioassay.bottle_test.search
       summary: Retrieve bottle tests
       description: Retrieve bottle tests
       responses:
@@ -85,6 +86,7 @@ paths:
         schema:
           $ref: '#components/schemas/BottleTest/properties/id'
     get:
+      operationId: bottle_bioassay.bottle.search
       summary: Retrieve bottles from a specific test
       description: Retrieve bottles from a specific test
       responses:
@@ -219,6 +221,7 @@ paths:
         schema:
           type: integer
     get:
+      operationId: bottle_bioassay.bottle.search
       summary: Retrieve bottle tests
       description: Retrieve bottle tests
       responses:

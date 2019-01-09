@@ -5,8 +5,7 @@ import connexion
 app = connexion.FlaskApp(__name__, specification_dir='./openapi/v1')
 
 # Read the swagger.yml file to configure the endpoints
-app.add_api('bottle-bioassays.yml',
-            resolver=connexion.RestyResolver('bottle-bioassay'))
+app.add_api('bottle_bioassays.yml')
 
 
 # Create a URL route in our application for "/"

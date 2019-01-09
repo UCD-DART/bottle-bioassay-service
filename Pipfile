@@ -9,6 +9,8 @@ verify_ssl = true
 flask = "*"
 connexion = {extras = ["swagger-ui"],version = "*"}
 pytest = "*"
+pycodestyle = "*"
+pylint = "*"
 
 [requires]
 python_version = "3.6"
