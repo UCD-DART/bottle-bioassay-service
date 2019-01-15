@@ -8,7 +8,7 @@ before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - psql -c "alter user postgres with encrypted password 'password'" -U postgres
   - psql -a -f .travis.postgres.sql -U postgres -d travis_ci_test
-  - echo "[db]\nhost: localhost\ndbname: travis_ci_test\nuser: postgres\npass: password" > credentials.conf
+  - cp .travis.credentials.conf credentials.conf
 
 script:
   - make ci
