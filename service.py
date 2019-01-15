@@ -1,11 +1,13 @@
-from flask import render_template
+from flask import render_template, jsonify
 import connexion
+from alchemy_encoder import AlchemyEncoder
 
 # Create the application instance
 app = connexion.FlaskApp(__name__, specification_dir='./openapi/v1')
 
 # Read the swagger.yml file to configure the endpoints
 app.add_api('bottle_bioassays.yml')
+app.app.json_encoder = AlchemyEncoder
 
 
 # Create a URL route in our application for "/"

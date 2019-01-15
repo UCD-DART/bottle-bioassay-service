@@ -11,6 +11,8 @@ connexion = {extras = ["swagger-ui"],version = "*"}
 pytest = "*"
 pycodestyle = "*"
 pylint = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.6"

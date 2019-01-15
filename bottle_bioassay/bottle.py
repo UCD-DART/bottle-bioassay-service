@@ -1,6 +1,6 @@
-def get():
-    print('get')
+def get(id):
+    return 'get:' + str(id)
 
 
 def search():
-    print('search')
+    return 'search'

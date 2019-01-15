@@ -13,7 +13,7 @@ info:
 paths:
   /bottletests:
     parameters:
-      - name: length
+      - name: limit
         in: query
         description: Number of bottle tests to return
         required: false
@@ -51,7 +51,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
 
-
   /bottletests/{id}:
     parameters:
       - name: id
@@ -61,6 +60,7 @@ paths:
         schema:
           $ref: '#components/schemas/BottleTest/properties/id'
     get:
+      operationId: bottle_bioassay.bottle_test.get
       summary: Retrieve a specific bottle test
       description: Retrieve a specific bottle test
       responses:
@@ -77,138 +77,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
 
-  /bottletests/{id}/bottles:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleTest/properties/id'
-    get:
-      operationId: bottle_bioassay.bottle.search
-      summary: Retrieve bottles from a specific test
-      description: Retrieve bottles from a specific test
-      responses:
-        200:
-          description: Successfully retrieved bottles from a specific bottle test
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/Bottle'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel'
-
-  /bottletests/{id}/bottles/{bottle_id}:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleTest/properties/id'
-      - name: bottle_id
-        in: path
-        description: Id of the bottle 
-        required: true
-        schema:
-          $ref: '#components/schemas/Bottle/properties/id'
-    get:
-      summary: Retrieve bottles from a specific test
-      description: Retrieve bottles from a specific test
-      responses:
-        200:
-          description: Successfully retrieved bottles from a specific bottle test
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/Bottle'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel'
-
-  /bottletests/{id}/bottles/{bottle_id}/counts:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleTest/properties/id'
-      - name: bottle_id
-        in: path
-        description: Id of the bottle 
-        required: true
-        schema:
-          $ref: '#components/schemas/Bottle/properties/id'
-    get:
-      summary: Retrieve bottles from a specific test
-      description: Retrieve bottles from a specific test
-      responses:
-        200:
-          description: Successfully retrieved bottles from a specific bottle test
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/BottleCount'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel' 
-
-  /bottletests/{id}/bottles/{bottle_id}/counts/{count_id}:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleTest/properties/id'
-      - name: bottle_id
-        in: path
-        description: Id of the bottle 
-        required: true
-        schema:
-          $ref: '#components/schemas/Bottle/properties/id'
-      - name: count_id
-        in: path
-        description: Id of the count
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleCount/properties/id'
-    get:
-      summary: Retrieve a specific count
-      description: Retrieve a specific count 
-      responses:
-        200:
-          description: Successfully retrieved specific count
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/BottleCount'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel'          
-
   /bottles:
     parameters:
-      - name: length
+      - name: limit
         in: query
         description: Number of bottle tests to return
         required: false
@@ -255,6 +126,7 @@ paths:
         schema:
           $ref: '#components/schemas/Bottle/properties/id'
     get:
+      operationId: bottle_bioassay.bottle.get
       summary: Retrieve a specific bottle
       description: Retrieve a specific bottle identified by id
       responses:
@@ -271,67 +143,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
 
-  /bottles/{id}/counts:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/Bottle/properties/id'
-    get:
-      summary: Retrieve a specific bottle's counts
-      description: Retrieve a specific bottle's count
-      responses:
-        200:
-          description: Successfully retrieved a bottle test's counts
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#components/schemas/BottleCount'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel'
-
-  /bottles/{id}/counts/{count_id}:
-    parameters:
-      - name: id
-        in: path
-        description: Id of the bottle test
-        required: true
-        schema:
-          $ref: '#components/schemas/Bottle/properties/id'
-      - name: count_id
-        in: path
-        description: Id of the bottle count
-        required: true
-        schema:
-          $ref: '#components/schemas/BottleCount/properties/id'
-    get:
-      summary: Retrieve a specific bottle count
-      description: Retrieve a specific bottle count
-      responses:
-        200:
-          description: Successfully retrieved a bottle count
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/BottleCount'
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorModel'
-
   /bottlecounts:
     parameters:
-      - name: length
+      - name: limit
         in: query
         description: Number of bottle tests to return
         required: false
@@ -344,6 +158,7 @@ paths:
         schema:
           type: integer
     get:
+      operationId: bottle_bioassay.bottle_count.search
       summary: Retrieve bottle count
       description: Retrieve bottle tests
       responses:
@@ -377,6 +192,7 @@ paths:
         schema:
           $ref: '#components/schemas/BottleCount/properties/id'
     get:
+      operationId: bottle_bioassay.bottle_count.get
       summary: Retrieve a specific bottle count
       description: Retrieve a specific bottle identified by id
       responses:
@@ -570,7 +386,7 @@ components:
           type: integer
           description: The bottle id this count belongs to
           example: 100
-        exposure_length:
+        exposure_limit:
           type: integer
           description: The time in minutes of this reading
           minimum: 0
