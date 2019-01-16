@@ -4,11 +4,15 @@ python:
   - "3.6"
 # command to install dependencies
 install: make
+env:
+  - DBHOST=localhost
+  - DBNAME=travis_ci_test
+  - DBUSER=postgres
+  - DBPASS=password
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - psql -c "alter user postgres with encrypted password 'password'" -U postgres
-  - psql -a -f .travis.postgres.sql -U postgres -d travis_ci_test
-  - cp .travis.credentials.conf credentials.conf
+  - psql -c 'create database $DBNAME;' -U $DBUSER
+  - psql -c "alter user $DBUSER with encrypted password '$DBPASS'" -U $DBUSER
+  - psql -a -f travis/fixtures.sql -U postgres -d $DBNAME
 
 script:
   - make ci
