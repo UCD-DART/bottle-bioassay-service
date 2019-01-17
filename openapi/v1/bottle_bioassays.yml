@@ -13,18 +13,11 @@ info:
 paths:
   /bottletests:
     parameters:
-      - name: limit
-        in: query
-        description: Number of bottle tests to return
-        required: false
-        schema:
-          type: integer
-      - name: offset
-        in: query
-        description: Offset from beginning of list where to start gathering bottle tests
-        required: false
-        schema:
-          type: integer
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/sort_by'
+      - $ref: '#/components/parameters/filter'
     get:
       operationId: bottle_bioassay.bottle_test.search
       summary: Retrieve bottle tests
@@ -43,7 +36,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: '#components/schemas/BottleTest'
+                  $ref: '#/components/schemas/BottleTest'
         default:
           description: Unexpected error
           content:
@@ -58,7 +51,7 @@ paths:
         description: Id of the bottle test
         required: true
         schema:
-          $ref: '#components/schemas/BottleTest/properties/id'
+          $ref: '#/components/schemas/BottleTest/properties/id'
     get:
       operationId: bottle_bioassay.bottle_test.get
       summary: Retrieve a specific bottle test
@@ -69,7 +62,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/BottleTest'
+                $ref: '#/components/schemas/BottleTest'
         default:
           description: Unexpected error
           content:
@@ -79,18 +72,11 @@ paths:
 
   /bottles:
     parameters:
-      - name: limit
-        in: query
-        description: Number of bottle tests to return
-        required: false
-        schema:
-          type: integer
-      - name: offset
-        in: query
-        description: Offset from beginning of list where to start gathering bottle tests
-        required: false
-        schema:
-          type: integer
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/sort_by'
+      - $ref: '#/components/parameters/filter'
     get:
       operationId: bottle_bioassay.bottle.search
       summary: Retrieve bottle tests
@@ -109,7 +95,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: '#components/schemas/Bottle'
+                  $ref: '#/components/schemas/Bottle'
         default:
           description: Unexpected error
           content:
@@ -124,7 +110,7 @@ paths:
         description: Id of the bottle test
         required: true
         schema:
-          $ref: '#components/schemas/Bottle/properties/id'
+          $ref: '#/components/schemas/Bottle/properties/id'
     get:
       operationId: bottle_bioassay.bottle.get
       summary: Retrieve a specific bottle
@@ -135,7 +121,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Bottle'
+                $ref: '#/components/schemas/Bottle'
         default:
           description: Unexpected error
           content:
@@ -145,18 +131,11 @@ paths:
 
   /bottlecounts:
     parameters:
-      - name: limit
-        in: query
-        description: Number of bottle tests to return
-        required: false
-        schema:
-          type: integer
-      - name: offset
-        in: query
-        description: Offset from beginning of list where to start gathering bottle tests
-        required: false
-        schema:
-          type: integer
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/sort_by'
+      - $ref: '#/components/parameters/filter'
     get:
       operationId: bottle_bioassay.bottle_count.search
       summary: Retrieve bottle count
@@ -175,7 +154,7 @@ paths:
               schema:
                 type: array
                 items: 
-                  $ref: '#components/schemas/BottleCount'
+                  $ref: '#/components/schemas/BottleCount'
         default:
           description: Unexpected error
           content:
@@ -190,7 +169,7 @@ paths:
         description: Id of the bottle count
         required: true
         schema:
-          $ref: '#components/schemas/BottleCount/properties/id'
+          $ref: '#/components/schemas/BottleCount/properties/id'
     get:
       operationId: bottle_bioassay.bottle_count.get
       summary: Retrieve a specific bottle count
@@ -201,15 +180,52 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Bottle'
+                $ref: '#/components/schemas/Bottle'
         default:
           description: Unexpected error
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorModel'
-
+                
 components:
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: Number of bottle tests to return
+      required: false
+      schema:
+        type: integer
+    offset:
+      name: offset
+      in: query
+      description: Offset from beginning of list where to start gathering bottle tests
+      required: false
+      schema:
+        type: integer
+    sort:
+      name: sort
+      in: query
+      description: Direction to sort  
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+    sort_by:
+      name: sort_by
+      in: query
+      description: Value to sort on
+      schema: 
+        type: string
+    filter:
+      name: filter
+      in: query
+      description: filter
+      schema:
+        type: string
+
   responses:
     NotFound:
       description: The specified resource was not found
@@ -320,7 +336,7 @@ components:
         bottles:
           type: array
           items:
-            $ref: '#components/schemas/Bottle'
+            $ref: '#/components/schemas/Bottle'
 
     Bottle:
       properties:
@@ -374,7 +390,7 @@ components:
         counts:
           type: array
           items:
-            $ref: '#components/schemas/BottleCount'
+            $ref: '#/components/schemas/BottleCount'
 
     BottleCount:
       properties:

@@ -1,8 +1,9 @@
 import db
+import json
 from . import BottleTest
 from sqlalchemy.orm.exc import NoResultFound
-import connexion
-from flask import jsonify
+from sqlalchemy_filters import apply_filters
+from sqlalchemy_filters.exceptions import BadSpec
 
 
 def get(id):
@@ -13,24 +14,31 @@ def get(id):
         return "not found", 404
 
 
-def search():
+def search(**kwargs):
     limit = 1000
     offset = 0
 
-    if 'limit' in connexion.request.args:
-        limit = int(connexion.request.args['limit'])
-    if limit > 1000 or limit < 0 or type(limit) is not int:
+    query = db.session.query(BottleTest)
+
+    if 'filter' in kwargs:
+        try:
+            filter = json.loads(kwargs['filter'])
+            query = apply_filters(query, filter)
+        except BadSpec:
+            return "Invalid Filter", 500
+
+    if 'limit' in kwargs:
+        limit = kwargs['limit']
+    if limit > 1000 or limit < 0:
         limit = 1000
 
-    if 'offset' in connexion.request.args:
-        offset = int(connexion.request.args['offset'])
-    if offset < 0 or type(offset) is not int:
+    if 'offset' in kwargs:
+        offset = kwargs['offset']
+    if offset < 0:
         offset = 0
 
-    bottle_tests = db.session.query(BottleTest) \
-                     .limit(limit) \
-                     .offset(offset) \
-                     .all()
-   
+    query = query.limit(limit).offset(offset)
+    bottle_tests = query.all()
+
     count = db.session.query(BottleTest).count()
     return bottle_tests, 200, {'X-total-count': count}

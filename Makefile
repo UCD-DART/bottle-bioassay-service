@@ -3,7 +3,9 @@ init:
 	pipenv install --dev
 
 test:
+	pycodestyle .
 	pipenv run py.test
 
 ci: 
+	pycodestyle .
 	pipenv run py.test

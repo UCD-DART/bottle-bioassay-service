@@ -15,6 +15,7 @@ sqlalchemy = "*"
 psycopg2-binary = "*"
 pyyaml = "*"
 python-dotenv = "*"
+sqlalchemy-filters = "*"
 
 [requires]
 python_version = "3.6"
