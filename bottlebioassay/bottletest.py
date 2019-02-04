@@ -1,6 +1,4 @@
-import db
-import json
-from . import BottleTest
+from .base import BottleTest
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy_filters import apply_filters
 from sqlalchemy_filters.exceptions import BadSpec

@@ -1,5 +1,5 @@
 from connexion.apps.flask_app import FlaskJSONEncoder
-from bottle_bioassay import Base
+from bottlebioassay import Base
 
 
 class AlchemyEncoder(FlaskJSONEncoder):

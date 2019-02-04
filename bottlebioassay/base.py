@@ -1,15 +1,12 @@
-import db
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Table, Column, Integer,\
                        String, DateTime, Text, Numeric, MetaData, ForeignKey
-
-__all__ = ['BottleTest', 'Bottle', 'BottleCount', 'Base']
 
 Base = declarative_base(metadata=MetaData(schema='resistance'))
 
 
 class BottleTest(Base):
-    __tablename__ = 'test_group'
+    __tablename__ = 'bottle_test'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
@@ -29,30 +26,46 @@ class BottleTest(Base):
     delete_date = Column(DateTime)
 
 
-class Bottle(Base):
-    __tablename__ = 'test_group_member'
+class BottleGroup(Base):
+    __tablename__ = 'bottle_test_group'
 
     id = Column(Integer, primary_key=True)
-    bottle_test = Column('test_group_id', Integer, ForeignKey('test_group.id'))
-    comments = Column(Text)
+    bottle_test = Column(
+        'bottle_test_id', Integer, ForeignKey('BottleTest.id')
+    )
     login_id = Column(Integer)
     agency_id = Column(Integer)
-    num_tested = Column(Integer)
-    replicate_num = Column(Integer)
     bio_class_id = Column(Integer)
     mosquitoes_source = Column(String)
-    colony_name = Column(String)
+    name = Column(String)
     generation = Column(Integer)
     add_date = Column(DateTime)
     delete_date = Column(DateTime)
 
 
-class BottleCount(Base):
-    __tablename__ = 'test_group_result'
+class Bottle(Base):
+    __tablename__ = 'bottle_test_group_member'
 
     id = Column(Integer, primary_key=True)
-    bottle = Column('test_group_member_id',
-                    Integer,
-                    ForeignKey('test_group_member.id'))
-    exposure_length = Column(Integer)
-    survival_count = Column(Integer)
+    bottle_test_group = Column(
+        'bottle_test_group_id', Integer, ForeignKey('BottleTestGroup.id')
+    )
+    login_id = Column(Integer)
+    agency_id = Column(Integer)
+    num_tested = Column(Integer)
+    replicate_num = Column(Integer)
+    add_date = Column(DateTime)
+    delete_date = Column(DateTime)
+
+
+class BottleResult(Base):
+    __tablename__ = 'bottle_test_group_member_result'
+
+    id = Column(Integer, primary_key=True)
+    bottle = Column(
+        'bottle_test_group_member_id', 
+        Integer, 
+        ForeignKey('BottleTestGroupMember.id')
+    )
+    time = Column('exposure_length', Integer)
+    alive = Column('survival_count', Integer)

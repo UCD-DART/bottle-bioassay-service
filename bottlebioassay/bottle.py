@@ -1,5 +1,3 @@
-import db
-import json
 from . import Bottle
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy_filters import apply_filters

@@ -1,0 +1,14 @@
+batch,pesticide,mosquito_source,time,alive,dead
+A,sumithrin,Douglas Park,0,25,0
+A,sumithrin,Douglas Park,15,25,0
+A,sumithrin,Douglas Park,30,24,1
+A,sumithrin,Douglas Park,45,24,1
+A,sumithrin,Douglas Park,60,21,4
+A,sumithrin,Douglas Park,75,18,7
+A,sumithrin,Douglas Park,90,18,7
+A,sumithrin,Douglas Park,105,17,8
+A,sumithrin,Douglas Park,120,17,8
+A,sumithrin,Douglas Park,135,16,9
+A,sumithrin,Douglas Park,150,14,11
+A,sumithrin,Douglas Park,165,12,13
+A,sumithrin,Douglas Park,180,12,13
