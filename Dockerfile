@@ -14,4 +14,4 @@ RUN apk update \
     && pip install -r requirements.txt
 
 CMD [ "sh", "-c", \
-        "uwsgi --socket 0.0.0.0:3031 --plugins python3 --protocol uwsgi --wsgi service:app" ] 
+        "uwsgi --http :3031 --wsgi service:app" ] 
