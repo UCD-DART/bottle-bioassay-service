@@ -1,6 +1,4 @@
 from flask import render_template, jsonify
-import connexion
-from alchemy_encoder import AlchemyEncoder
 from flask import Flask, request
 from bottlebioassay import kd
 
